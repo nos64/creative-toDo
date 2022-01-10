@@ -1,0 +1,41 @@
+.todo-wrapper {
+  min-width: 300px;
+  min-height: 200px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  width: 60%;
+  background-color: rgba(212, 217, 240, 0.7);
+  box-shadow: 0 0 10px #000;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.add-place {
+  height: 20px;
+  font-size: 20px;
+  margin-right: 5px;
+  background-color: transparent;
+  border: none;
+  outline:none;
+  border-bottom: 4px solid rgb(95, 104, 236);
+}
+
+
+.add-btn {
+  width: auto;
+  padding: 10px;
+  background-color:rgb(95, 104, 236);
+  border: none;
+  color: #FFF;
+  transition: background-color .3s ease-in-out;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-btn:hover {
+  background-color:rgb(0, 17, 255);
+}
