@@ -27,14 +27,9 @@ export default class ToDo extends React.Component {
         text: this.state.inputValue,
         key: Date.now()
       }
-      // this.setState({
-      //   tasks: [...this.state.tasks.newTask]
-      // })
-      this.setState((prevState) => {
-        return { 
-          tasks: prevState.tasks.concat(newTask) 
-        };
-      });
+      this.setState({
+        tasks: [...this.state.tasks, newTask]
+      })
     
       this.state.inputValue = "";
     }
