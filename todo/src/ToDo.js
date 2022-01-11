@@ -2,68 +2,77 @@ import './ToDo.css';
 import React from 'react';
 
 import Greeting  from "./components/Greeting/Greeting";
-import TodoItems from './components/TodoItems';
+import TodoItems from './components/TodoItems/TodoItems';
 
 
- export default class ToDo extends React.Component {
+export default class ToDo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      items: []
-    };
-    this.addItem = this.addItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-  }
-
-  addItem(e) {
-    if (this.inputElement.value !== "") {
-      let newItem = {
-        text: this.inputElement.value,
-        key: Date.now()
-  }
-  this.setState((prevState) => {
-    return { 
-      items: prevState.items.concat(newItem) 
-    };
-  });
- 
-  this.inputElement.value = "";
-  }
-  
-  console.log(this.state.items);
     
-  e.preventDefault();
+    this.state = {
+      tasks: [],
+      inputValue: '',
+    };
+
+    this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTaskHandler.bind(this);
+    this.changeInputHandler = this.changeInputHandler.bind(this);
   }
 
-  deleteItem(key) {
-    let filteredItems = this.state.items.filter(function (item) {
-      return (item.key !== key);
-    });
-   
+  addTask(e) {
+    e.preventDefault();
+
+    if (this.state.inputValue !== "") {
+      const newTask = {
+        text: this.state.inputValue,
+        key: Date.now()
+      }
+      // this.setState({
+      //   tasks: [...this.state.tasks.newTask]
+      // })
+      this.setState((prevState) => {
+        return { 
+          tasks: prevState.tasks.concat(newTask) 
+        };
+      });
+    
+      this.state.inputValue = "";
+    }
+  }
+
+  changeInputHandler(e) {
     this.setState({
-      items: filteredItems
+      inputValue: e.target.value
+    });
+  }
+
+  deleteTaskHandler(key) {
+    const filteredTask = this.state.tasks.filter(task => task.key !== key);
+
+    this.setState({
+      tasks: filteredTask
     });
   }
 
   render() {
   
-      return (
+    return (
+      <div className="todo-wrapper">
+        <Greeting />
 
-        <div className="todo-wrapper">
-          <Greeting />
-          <form onSubmit={this.addItem}>
-            <input className="add-place" ref={(a) => this.inputElement = a}
-            placeholder="Add new task">
-            </input>
-            <button className='add-btn' type="submit">ADD NEW TASK</button>
-          </form>
-          <TodoItems entries={this.state.items}
-            delete={this.deleteItem}
-          />
-        </div>
-    
-      );
+        <form onSubmit={this.addTask}>
+          <input className="add-place" onChange={this.changeInputHandler}
+          value={this.state.inputValue}
+          placeholder="Add new task">
+          </input>
+          <button className='add-btn' type="submit">ADD NEW TASK</button>
+        </form>
+
+        <TodoItems entries={this.state.tasks}
+          delete={this.deleteTaskHandler}
+        />
+      </div>
+
+    );
   }
 }
-
-

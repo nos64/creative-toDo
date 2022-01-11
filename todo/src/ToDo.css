@@ -1,3 +1,7 @@
+:root {
+  --main-color: rgb(95, 104, 236);
+}
+
 .todo-wrapper {
   min-width: 300px;
   min-height: 200px;
@@ -15,20 +19,20 @@
 }
 
 .add-place {
-  height: 20px;
+  min-height: 20px;
   font-size: 20px;
   margin-right: 5px;
   background-color: transparent;
   border: none;
   outline:none;
-  border-bottom: 4px solid rgb(95, 104, 236);
+  border-bottom: 4px solid var(--main-color);
 }
 
 
 .add-btn {
   width: auto;
   padding: 10px;
-  background-color:rgb(95, 104, 236);
+  background-color:var(--main-color);
   border: none;
   color: #FFF;
   transition: background-color .3s ease-in-out;
