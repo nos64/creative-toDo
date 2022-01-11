@@ -1,0 +1,45 @@
+.todo-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.todo-item {
+  min-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgb(160, 154, 154);
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 30px;
+}
+
+label {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+input[type=checkbox]:checked + span {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.del-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(223, 103, 103);
+  font: 15px 'Roboto' sans-serif;
+  font-weight: 700;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.del-btn:hover {
+  background-color: rgb(240, 15, 15);
+}
