@@ -21,7 +21,7 @@ export default class ToDo extends React.Component {
 
   findDuplicateTasks(tasks, inputValue) {
     return tasks.filter((item) => {
-      if(item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()){
+      if(item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
         alert('This task already exists')
         this.state.inputValue = "";
       }
@@ -62,7 +62,6 @@ export default class ToDo extends React.Component {
   render() {
   
     return (
-      <>
       
         <div className={`todo-wrapper-${this.context} todo-wrapper`}>
       
@@ -80,7 +79,6 @@ export default class ToDo extends React.Component {
             delete={this.deleteTaskHandler}
           />
         </div>
-      </>
         
     );
   }
