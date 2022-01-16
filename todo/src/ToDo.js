@@ -13,9 +13,9 @@ export default class ToDo extends React.Component {
       tasks: [],
       inputValue: '',
     };
-
+    
     this.addTask = this.addTask.bind(this);
-    this.deleteTask = this.deleteTaskHandler.bind(this);
+    this.deleteTaskHandler = this.deleteTaskHandler.bind(this);
     this.changeInputHandler = this.changeInputHandler.bind(this);
   }
 
