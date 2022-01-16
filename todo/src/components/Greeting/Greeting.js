@@ -1,6 +1,8 @@
 import React from "react";
 import "./Greeting.css"
+import { ThemeContext} from "../ThemeContext/ThemeContext";
 export default class Greeting extends React.Component {
+  static contextType = ThemeContext;
   render() {
     const date = new Date();
     const hours = date.getHours();
@@ -16,9 +18,11 @@ export default class Greeting extends React.Component {
     }
 
     return (
-      <h1 className="head">
+      
+      <h1 className={`head-${this.context} head`}>
         Good {timeOfDay}!
       </h1>
+
     );
   }
 }
