@@ -3,15 +3,16 @@ import React from 'react';
 
 import Greeting  from "./components/Greeting/Greeting";
 import TodoItems from './components/TodoItems/TodoItems';
+import WihLoadingComponent from './components/Loader/LoaderHOC'
 
-
-export default class ToDo extends React.Component {
+class ToDo extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
       tasks: [],
       inputValue: '',
+      show: false,
     };
     
     this.addTask = this.addTask.bind(this);
@@ -52,6 +53,7 @@ export default class ToDo extends React.Component {
   render() {
   
     return (
+    
       <div className="todo-wrapper">
         <Greeting />
 
@@ -63,11 +65,14 @@ export default class ToDo extends React.Component {
           <button className='add-btn' type="submit">ADD NEW TASK</button>
         </form>
 
-        <TodoItems entries={this.state.tasks}
-          delete={this.deleteTaskHandler}
-        />
+          <TodoItems entries={this.state.tasks}
+            delete={this.deleteTaskHandler}
+          />
+      
       </div>
-
+      
     );
   }
 }
+
+export default WihLoadingComponent(ToDo)
