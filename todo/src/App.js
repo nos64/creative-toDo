@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import ToDo from './components/Todo/ToDo';
 import { ThemeContext} from './components/ThemeContext/ThemeContext';
-
-export default class App extends React.Component {
+import WihLoadingComponent from './components/Loader/LoaderHOC';
+class App extends React.Component {
   constructor(props) {
 
     super(props);
@@ -53,3 +53,5 @@ export default class App extends React.Component {
     )
   };
 }
+
+export default WihLoadingComponent(App)
