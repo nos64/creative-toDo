@@ -1,5 +1,7 @@
 :root {
   --main-color: rgb(95, 104, 236);
+  --dark-bg-color: rgb(7, 7, 7);
+  --dark-color: rgb(170, 170, 170);
 }
 
 .todo-wrapper {
@@ -38,8 +40,8 @@
 }
 
 .add-place-dark {
-  border-bottom: 4px solid rgb(7, 7, 7);
-  color:rgb(170, 170, 170);
+  border-bottom: 4px solid var(--dark-bg-color);
+  color:var(--dark-color);
 }
 
 .add-btn {
@@ -57,8 +59,8 @@
 }
 
 .add-btn-dark {
-  background-color:rgb(7, 7, 7);
-  color: rgb(170, 170, 170);
+  background-color:var(--dark-bg-color);
+  color: var(--dark-color);
 }
 
 .add-btn-light:hover {

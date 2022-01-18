@@ -1,9 +1,10 @@
 import React from 'react';
-import "./TodoItems.css"
-import {ThemeContext} from "../ThemeContext/ThemeContext";
+import './TodoItems.css';
+import {ThemeContext} from '../ThemeContext/ThemeContext';
 
 export default class TodoItems extends React.Component {
   static contextType = ThemeContext;
+
   constructor(props) {
     super(props);
 
@@ -18,7 +19,7 @@ export default class TodoItems extends React.Component {
     return (
     <li key={item.key} className='todo-item'>
         <label>
-          <input type="checkbox"/>
+          <input type='checkbox'/>
           <span className={`label-${this.context}`}>{item.text}</span>
         </label>
 

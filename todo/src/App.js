@@ -5,41 +5,47 @@ import { ThemeContext} from './components/ThemeContext/ThemeContext';
 
 export default class App extends React.Component {
   constructor(props) {
+
     super(props);
     this.state = {
       theme: 'dark',
       textBtn: 'Light theme',
     };
-    this.toggleTheme = this.toggleTheme.bind(this)
-    this.toggleDescriptionBtn = this.toggleDescriptionBtn.bind(this)
+    this.handlerToggleTheme = this.handlerToggleTheme.bind(this)
+    this.handlerToggleDescriptionBtn = this.handlerToggleDescriptionBtn.bind(this)
   };
 
-  toggleTheme() {
-    console.log();
+  handlerToggleTheme() {
     this.setState(state => ({
       theme:
       state.theme === 'dark' ? 'light' : 'dark'
     }))
   };
 
-  toggleDescriptionBtn(){
+  handlerToggleDescriptionBtn(){
+    const THEME_MODE = {
+      DARK: 'Dark theme',
+      LIGHT: 'Light theme',
+    }
+
     this.setState(state => ({
     textBtn:
-    state.textBtn === 'Light theme' ? 'Dark theme' : 'Light theme'
+    state.textBtn === THEME_MODE.LIGHT ? THEME_MODE.DARK : THEME_MODE.LIGHT
     }))
   }
 
-  toggleThemeAndDescriptionBtn = () =>{
-    this.toggleTheme();
-    this.toggleDescriptionBtn();
+  handlerToggleThemeAndDescriptionBtn = () =>{
+    this.handlerToggleTheme();
+    this.handlerToggleDescriptionBtn();
   }
 
   render() {
     return(
       <ThemeContext.Provider value={this.state.theme}>
-        <button className={`switch-btn-${this.state.theme} switch-btn`}
-        onClick={this.toggleThemeAndDescriptionBtn}>
-        {this.state.textBtn}
+        <button 
+          className={`switch-btn-${this.state.theme} switch-btn`}
+          onClick={this.handlerToggleThemeAndDescriptionBtn}>
+          {this.state.textBtn}
         </button>
 
         <ToDo/>
