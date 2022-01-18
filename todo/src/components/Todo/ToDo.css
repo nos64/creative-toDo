@@ -1,21 +1,29 @@
 :root {
   --main-color: rgb(95, 104, 236);
+  --dark-bg-color: rgb(7, 7, 7);
+  --dark-color: rgb(170, 170, 170);
 }
 
 .todo-wrapper {
   min-width: 300px;
   min-height: 200px;
-  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items:center;
   width: 60%;
-  background-color: rgba(212, 217, 240, 0.7);
   box-shadow: 0 0 10px #000;
   font-size: 20px;
   border-radius: 5px;
+}
+
+.todo-wrapper-light {
+  background-color: rgb(194, 194, 194);
+}
+
+.todo-wrapper-dark {
+  background-color: rgb(58, 58, 58);
 }
 
 .add-place {
@@ -25,21 +33,40 @@
   background-color: transparent;
   border: none;
   outline:none;
+}
+
+.add-place-light {
   border-bottom: 4px solid var(--main-color);
 }
 
+.add-place-dark {
+  border-bottom: 4px solid var(--dark-bg-color);
+  color:var(--dark-color);
+}
 
 .add-btn {
   width: auto;
   padding: 10px;
-  background-color:var(--main-color);
-  border: none;
-  color: #FFF;
   transition: background-color .3s ease-in-out;
   cursor: pointer;
   border-radius: 5px;
+  border: none;
 }
 
-.add-btn:hover {
+.add-btn-light {
+  background-color:var(--main-color);
+  color: #FFF;
+}
+
+.add-btn-dark {
+  background-color:var(--dark-bg-color);
+  color: var(--dark-color);
+}
+
+.add-btn-light:hover {
   background-color:rgb(0, 17, 255);
+}
+
+.add-btn-dark:hover {
+  background-color:rgb(41, 41, 41);
 }

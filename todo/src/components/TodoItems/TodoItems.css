@@ -20,6 +20,17 @@ input[type="checkbox"] {
 label {
   cursor: pointer;
   margin-right: 20px;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.label-light {
+  color: #000;
+}
+
+.label-dark {
+  color:rgb(170, 170, 170);
 }
 
 input[type=checkbox]:checked + span {
@@ -32,14 +43,27 @@ input[type=checkbox]:checked + span {
   height: 40px;
   border-radius: 50%;
   border: none;
-  background-color: rgb(223, 103, 103);
   font: 15px 'Roboto' sans-serif;
   font-weight: 700;
-  color: #FFF;
   cursor: pointer;
   transition: background-color .3s ease-in-out;
 }
 
-.del-btn:hover {
+.del-btn-light {
+  background-color: rgb(223, 103, 103);
+  color: #FFF;
+}
+
+.del-btn-dark {
+  background-color: rgb(131, 86, 86);
+  color:rgb(170, 170, 170);
+}
+
+.del-btn-light:hover {
   background-color: rgb(240, 15, 15);
+}
+
+.del-btn-dark:hover {
+  background-color: rgb(201, 97, 97);
+
 }

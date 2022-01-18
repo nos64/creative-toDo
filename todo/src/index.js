@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import ToDo from './ToDo';
+import App from './App';
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <ToDo />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
