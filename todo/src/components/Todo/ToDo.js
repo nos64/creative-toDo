@@ -9,14 +9,13 @@ const ToDo = () => {
   let [tasks, setTasks] = useState([]);
   let [inputValue, setInputValue] = useState('');
 
-  const findDuplicateTasks = (tasks, inputValue) => {
+  const findDuplicateTasks = () => {
     return tasks.filter((item) => {
       if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
         alert('This task already exists')
         setInputValue(
           inputValue = ''
         )
-        console.log('0', inputValue)
       }
     })
   }
@@ -25,17 +24,17 @@ const ToDo = () => {
     e.preventDefault();
 
     findDuplicateTasks(tasks, inputValue);
-    console.log('1', inputValue)
     if (inputValue.trim()) {
       
       const newTask = {
         text: inputValue,
-        key: Date.now()
+        key: Date.now().toString()
       }
-      console.log('2', inputValue)
+
       setTasks (
         tasks = [...tasks, newTask]
       )
+      console.log(newTask)
     }
     setInputValue(
       inputValue = ''
