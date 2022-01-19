@@ -2,13 +2,15 @@ import React from 'react';
 import './App.css';
 import ToDo from './components/Todo/ToDo';
 import { ThemeContext} from './components/ThemeContext/ThemeContext';
-import WihLoadingComponent from './components/Loader/LoaderHOC';
+import WithLoadingComponent from './components/Loader/LoaderHOC';
+import PropTypes from 'prop-types';
+
 class App extends React.Component {
   constructor(props) {
 
     super(props);
     this.state = {
-      theme: 'dark',
+      theme: 'light',
       textBtn: 'Light theme',
     };
     this.handlerToggleTheme = this.handlerToggleTheme.bind(this)
@@ -54,4 +56,9 @@ class App extends React.Component {
   };
 }
 
-export default WihLoadingComponent(App)
+export default WithLoadingComponent(App)
+
+ThemeContext.Provider.propTypes = {
+  value: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import './TodoItems.css';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
+import PropTypes from 'prop-types';
 
 export default class TodoItems extends React.Component {
   static contextType = ThemeContext;
@@ -38,3 +39,7 @@ export default class TodoItems extends React.Component {
   }
 }
 
+TodoItems.propTypes = {
+  entries: PropTypes.array,
+  delete: PropTypes.func,
+}
