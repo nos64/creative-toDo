@@ -12,7 +12,7 @@ const LoaderHOC = (WrappedComponent) => {
     }
 
     componentDidMount() {
-      this.timeout = setTimeout(() => this.setState({ show: true}), 3000)
+      this.timeout = setTimeout(() => this.setState({ show: true}), 1000)
     }
 
     commponentDidUpdate() {

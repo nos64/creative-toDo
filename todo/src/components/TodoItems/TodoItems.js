@@ -3,43 +3,43 @@ import './TodoItems.css';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
 import PropTypes from 'prop-types';
 
-export default class TodoItems extends React.Component {
-  static contextType = ThemeContext;
+const TodoItems = (props) => {
 
-  constructor(props) {
-    super(props);
-
-    this.createTasks = this.createTasks.bind(this);
+  const onTaskDelete = (key) => {
+    props.delete(key);
   }
 
-  onTaskDelete(key) {
-    this.props.delete(key);
-  }
+  const createTasks = (item) => {
 
-  createTasks(item) {
     return (
-    <li key={item.key} className='todo-item'>
-        <label>
-          <input type='checkbox'/>
-          <span className={`label-${this.context}`}>{item.text}</span>
-        </label>
-
-        <button className={`del-btn-${this.context} del-btn`}
-        onClick={() => this.onTaskDelete(item.key)}>X</button>
-    </li>
+      <ThemeContext.Consumer>
+        {context => (
+          <li key={item.key} className='todo-item'>
+            <label>
+              <input type='checkbox'/>
+              <span className={`label-${context}`}>{item.text}</span>
+            </label>
+  
+            <button className={`del-btn-${context} del-btn`}
+            onClick={() => onTaskDelete(item.key)}>X</button>
+          </li>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 
-  render () {
-    return(
-      <ul className='todo-list'>
-        {this.props.entries.map(this.createTasks)}
-      </ul>
-    );
-  }
+  return(
+        
+    <ul className='todo-list'>
+      {props.entries.map(createTasks)}
+    </ul>
+    
+  );
 }
 
 TodoItems.propTypes = {
   entries: PropTypes.array,
   delete: PropTypes.func,
 }
+
+export default TodoItems;
