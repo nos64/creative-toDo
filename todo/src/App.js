@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 
 const App = () => {
   const [theme, setTheme] = useState('light');
-  const [textBtn, settextBtn] = useState('Light theme');
+  const [textBtn, setTextBtn] = useState('Light theme');
 
   const handlerToggleTheme = () => {
-    settextBtn(
+    setTheme(
       theme === 'dark' ? 'light' : 'dark'
     )
   };
@@ -22,7 +22,7 @@ const App = () => {
       LIGHT: 'Light theme',
     };
 
-    setTheme(
+    setTextBtn(
       textBtn === THEME_MODE.LIGHT ?
       THEME_MODE.DARK : 
       THEME_MODE.LIGHT

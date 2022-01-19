@@ -1,87 +1,84 @@
 import './ToDo.css';
-import React from 'react';
+import React, {useState} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
 
-export default class ToDo extends React.Component {
-  static contextType = ThemeContext;
+const ToDo = () => {
 
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      tasks: [],
-      inputValue: '',
-    };
+  let [tasks, setTasks] = useState([]);
+  let [inputValue, setInputValue] = useState('');
 
-    this.addTaskHandler = this.addTaskHandler.bind(this);
-    this.deleteTaskHandler = this.deleteTaskHandler.bind(this);
-    this.changeInputHandler = this.changeInputHandler.bind(this);
-  }
-  
-  findDuplicateTasks(tasks, inputValue) {
+  const findDuplicateTasks = (tasks, inputValue) => {
     return tasks.filter((item) => {
       if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
         alert('This task already exists')
-        this.state.inputValue = '';
+        setInputValue(
+          inputValue = ''
+        )
+        console.log('0', inputValue)
       }
     })
   }
-
-  addTaskHandler(e) {
+    
+  const addTaskHandler = (e) => {
     e.preventDefault();
 
-    this.findDuplicateTasks(this.state.tasks, this.state.inputValue)
-    if (this.state.inputValue.trim()) {
+    findDuplicateTasks(tasks, inputValue);
+    console.log('1', inputValue)
+    if (inputValue.trim()) {
+      
       const newTask = {
-        text: this.state.inputValue,
+        text: inputValue,
         key: Date.now()
       }
-
-      this.setState({
-        tasks: [...this.state.tasks, newTask]
-      })
-    
-      this.state.inputValue = '';
+      console.log('2', inputValue)
+      setTasks (
+        tasks = [...tasks, newTask]
+      )
     }
-  }
-
-  changeInputHandler(e) {
-    this.setState({
-      inputValue: e.target.value
-    });
-  }
-
-  deleteTaskHandler(key) {
-    const filteredTask = this.state.tasks.filter(task => task.key !== key);
-
-    this.setState({
-      tasks: filteredTask
-    });
-  }
-
-  render() {
-  
-    return (
-      
-        <div className={`todo-wrapper-${this.context} todo-wrapper`}>
-      
-          <Greeting/>
-          
-          <form onSubmit={this.addTaskHandler}>
-            <input className={`add-place-${this.context} add-place`} onChange={this.changeInputHandler}
-            value={this.state.inputValue}
-            placeholder='Add new task'>
-            </input>
-            <button className={`add-btn-${this.context} add-btn`} type="submit">ADD NEW TASK</button>
-          </form>
-
-          <TodoItems entries={this.state.tasks}
-            delete={this.deleteTaskHandler}
-          />
-        </div>
-        
+    setInputValue(
+      inputValue = ''
+    )
+    
+    }
+    
+  const changeInputHandler = (e) => {
+    setInputValue(
+      inputValue = e.target.value
     );
   }
+    
+  const deleteTaskHandler = (key) => {
+    const filteredTask = tasks.filter(task => task.key !== key);
+
+    setTasks (
+      tasks = filteredTask
+    )
+  }
+
+  return (
+    <ThemeContext.Consumer>
+    {context => (
+      <div className={`todo-wrapper-${context} todo-wrapper`}>
+    
+        <Greeting/>
+        
+        <form onSubmit={addTaskHandler}>
+          <input className={`add-place-${context} add-place`} onChange={changeInputHandler}
+          value={inputValue}
+          placeholder='Add new task'>
+          </input>
+          <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
+        </form>
+
+        <TodoItems entries={tasks}
+          delete={deleteTaskHandler}
+        />
+      </div>
+    )}
+      </ThemeContext.Consumer>
+  );
 }
+
+export default ToDo;

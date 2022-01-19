@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './LoadingHOC.css';
 import Oval from './oval.svg';
 
@@ -28,5 +28,24 @@ const LoaderHOC = (WrappedComponent) => {
     }
   }
 }
+
+
+
+
+
+// const WithLoadingComponent = (WrappedComponent) => {
+//   const [show, setShow] = useState('false');
+//   const { ...props } = props;
+//   return (
+//     show 
+//       ? <WrappedComponent {...props}/> 
+//       : <div className="loading">Loading...
+//           <img src={Oval} alt='Loader'/>
+//         </div>
+//   )
+// }
+   
+
+// const LoaderHOC = WithLoadingComponent(WrappedComponent);
 
 export default LoaderHOC;
