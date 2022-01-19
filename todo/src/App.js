@@ -1,64 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import ToDo from './components/Todo/ToDo';
 import { ThemeContext} from './components/ThemeContext/ThemeContext';
 import WithLoadingComponent from './components/Loader/LoaderHOC';
 import PropTypes from 'prop-types';
 
-class App extends React.Component {
-  constructor(props) {
+const App = () => {
+  const [theme, setTheme] = useState('light');
+  const [textBtn, settextBtn] = useState('Light theme');
 
-    super(props);
-    this.state = {
-      theme: 'light',
-      textBtn: 'Light theme',
-    };
-    this.handlerToggleTheme = this.handlerToggleTheme.bind(this)
-    this.handlerToggleDescriptionBtn = this.handlerToggleDescriptionBtn.bind(this)
+  const handlerToggleTheme = () => {
+    settextBtn(
+      theme === 'dark' ? 'light' : 'dark'
+    )
   };
 
-  handlerToggleTheme() {
-    this.setState(state => ({
-      theme:
-      state.theme === 'dark' ? 'light' : 'dark'
-    }))
-  };
-
-  handlerToggleDescriptionBtn(){
+  const handlerToggleDescriptionBtn = () => {
+    
     const THEME_MODE = {
       DARK: 'Dark theme',
       LIGHT: 'Light theme',
-    }
+    };
 
-    this.setState(state => ({
-    textBtn:
-    state.textBtn === THEME_MODE.LIGHT ? THEME_MODE.DARK : THEME_MODE.LIGHT
-    }))
+    setTheme(
+      textBtn === THEME_MODE.LIGHT ?
+      THEME_MODE.DARK : 
+      THEME_MODE.LIGHT
+    );
+      
   }
 
-  handlerToggleThemeAndDescriptionBtn = () =>{
-    this.handlerToggleTheme();
-    this.handlerToggleDescriptionBtn();
+  const handlerToggleThemeAndDescriptionBtn = () => {
+    handlerToggleTheme();
+    handlerToggleDescriptionBtn();
   }
 
-  render() {
-    return(
-      <ThemeContext.Provider value={this.state.theme}>
-        <button 
-          className={`switch-btn-${this.state.theme} switch-btn`}
-          onClick={this.handlerToggleThemeAndDescriptionBtn}>
-          {this.state.textBtn}
-        </button>
+  return(
+    <ThemeContext.Provider value={theme}>
+      <button 
+        className={`switch-btn-${theme} switch-btn`}
+        onClick={handlerToggleThemeAndDescriptionBtn}>
+        {textBtn}
+      </button>
 
-        <ToDo/>
-      </ThemeContext.Provider>
-    )
-  };
+      <ToDo/>
+
+    </ThemeContext.Provider>
+  )
+
 }
-
-export default WithLoadingComponent(App)
 
 ThemeContext.Provider.propTypes = {
   value: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
 }
+
+export default WithLoadingComponent(App);

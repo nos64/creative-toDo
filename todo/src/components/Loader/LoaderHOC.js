@@ -3,7 +3,7 @@ import './LoadingHOC.css';
 import Oval from './oval.svg';
 
 const LoaderHOC = (WrappedComponent) => {
-  return class WihLoadingComponent extends React.Component {
+  return class WithLoadingComponent extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
