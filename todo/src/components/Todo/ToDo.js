@@ -34,8 +34,8 @@ const ToDo = () => {
       setTasks (
         tasks = [...tasks, newTask]
       )
-      console.log(newTask)
     }
+
     setInputValue(
       inputValue = ''
     )

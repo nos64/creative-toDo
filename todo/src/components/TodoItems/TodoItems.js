@@ -9,19 +9,18 @@ const TodoItems = (props) => {
     props.delete(key);
   }
 
-  const createTasks = (item) => {
-
+  const createTasks = (task) => {
     return (
-      <ThemeContext.Consumer>
+      <ThemeContext.Consumer key={task.key}>
         {context => (
-          <li key={item.key} className='todo-item'>
+          <li key={task.key} className='todo-item'>
             <label>
               <input type='checkbox'/>
-              <span className={`label-${context}`}>{item.text}</span>
+              <span className={`label-${context}`}>{task.text}</span>
             </label>
   
             <button className={`del-btn-${context} del-btn`}
-            onClick={() => onTaskDelete(item.key)}>X</button>
+            onClick={() => onTaskDelete(task.key)}>X</button>
           </li>
         )}
       </ThemeContext.Consumer>
@@ -32,6 +31,7 @@ const TodoItems = (props) => {
         
     <ul className='todo-list'>
       {props.entries.map(createTasks)}
+
     </ul>
     
   );
