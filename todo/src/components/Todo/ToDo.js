@@ -1,14 +1,15 @@
 import './ToDo.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
+
 
 const ToDo = () => {
 
   let [tasks, setTasks] = useState([]);
   let [inputValue, setInputValue] = useState('');
-
+ 
   const findDuplicateTasks = () => {
     return tasks.filter((item) => {
       if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
