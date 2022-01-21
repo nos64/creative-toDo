@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './LoadingHOC.css';
+import './Loader.css';
 import Oval from './oval.svg';
 
 const Loader = () => {

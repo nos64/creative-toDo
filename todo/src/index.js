@@ -11,14 +11,14 @@ import {
 } from "react-router-dom";
 
 ReactDOM.render(
-    <React.StrictMode>
+    // <React.StrictMode>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Preview/>} />
         <Route path="myTodo" element={<App />} />
         </Routes>
-      </BrowserRouter>
-    </React.StrictMode>,
+      </BrowserRouter>,
+    // </React.StrictMode>,
   document.getElementById('root')
 );
 
