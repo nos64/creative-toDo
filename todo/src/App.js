@@ -9,11 +9,7 @@ const App = () => {
   const [theme, setTheme] = useState('light');
   const [textBtn, setTextBtn] = useState('Light theme');
 
-  const handlerToggleTheme = () => {
-    setTheme(
-      theme === 'dark' ? 'light' : 'dark'
-    )
-  };
+  const handlerToggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   const handlerToggleDescriptionBtn = () => {
     

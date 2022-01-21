@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 
 const TodoItems = (props) => {
 
-  const onTaskDelete = (key) => {
-    props.delete(key);
-  }
+  const onTaskDelete = (key) => props.delete(key);
 
   const createTasks = (task) => {
     return (
@@ -28,17 +26,14 @@ const TodoItems = (props) => {
   }
 
   return(
-        
     <ul className='todo-list'>
       {props.entries.map(createTasks)}
-
     </ul>
-    
   );
 }
 
 TodoItems.propTypes = {
-  entries: PropTypes.array,
+  entries: PropTypes.array.isRequired,
   delete: PropTypes.func,
 }
 

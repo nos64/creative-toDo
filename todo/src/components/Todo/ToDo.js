@@ -13,9 +13,7 @@ const ToDo = () => {
     return tasks.filter((item) => {
       if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
         alert('This task already exists')
-        setInputValue(
-          inputValue = ''
-        )
+        setInputValue(inputValue = '')
       }
     })
   }
@@ -31,29 +29,19 @@ const ToDo = () => {
         key: Date.now().toString()
       }
 
-      setTasks (
-        tasks = [...tasks, newTask]
-      )
+      setTasks (tasks = [...tasks, newTask])
     }
 
-    setInputValue(
-      inputValue = ''
-    )
+    setInputValue(inputValue = '')
     
     }
     
-  const changeInputHandler = (e) => {
-    setInputValue(
-      inputValue = e.target.value
-    );
-  }
+  const changeInputHandler = (e) => setInputValue(inputValue = e.target.value);
     
   const deleteTaskHandler = (key) => {
     const filteredTask = tasks.filter(task => task.key !== key);
 
-    setTasks (
-      tasks = filteredTask
-    )
+    setTasks (tasks = filteredTask)
   }
 
   return (
@@ -68,12 +56,11 @@ const ToDo = () => {
           value={inputValue}
           placeholder='Add new task'>
           </input>
+
           <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
         </form>
 
-        <TodoItems entries={tasks}
-          delete={deleteTaskHandler}
-        />
+        <TodoItems entries={tasks} delete={deleteTaskHandler}/>
       </div>
     )}
       </ThemeContext.Consumer>
