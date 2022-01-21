@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import '../Loader/LoadingHOC.css';
-import Oval from '../Loader/oval.svg'
+// import '../Loader/LoadingHOC.css';
+// import Oval from '../Loader/oval.svg'
 
 
 const WithLoadingComponent = (WrappedComponent) => props => {
@@ -9,9 +9,9 @@ const WithLoadingComponent = (WrappedComponent) => props => {
 
 }
 
-const HOC = (WithLoadingComponent);
+const Hoc = (WithLoadingComponent);
 
-export default HOC;
+export default Hoc;
 
 
 //Исходный компонент с работающим Loader
@@ -46,19 +46,11 @@ export default HOC;
 // const WithLoadingComponent = (WrappedComponent) => props =>{
 
 //     let [show, setShow] = useState(false);
- 
   
 //     useEffect(() => {
 //       setInterval(() => setShow(show = true), 1000)
 //     })
-  
-//     // if (show) {
-//     //   return <WrappedComponent {...props}/>
-//     // } else {
-//     //   <div className="loading">Loading...
-//     //     <img src={Oval} alt='Loader'/>
-//     //   </div>
-//     // }
+
 //     return(
 //       show ? <WrappedComponent {...props}/> 
 //       : <div className="loading">Loading...

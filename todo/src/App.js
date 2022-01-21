@@ -2,9 +2,10 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 import ToDo from './components/Todo/ToDo';
 import { ThemeContext} from './components/ThemeContext/ThemeContext';
-import WithLoadingComponent from './components/HOC/HOC';
+import WithLoadingComponent from './components/Hoc/Hoc';
 import PropTypes from 'prop-types';
 import Loader from './components/Loader/Loader';
+
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -47,7 +48,7 @@ const App = () => {
       </button>
 
       <ToDo/>
-
+    
     </ThemeContext.Provider>
   )
 
