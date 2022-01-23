@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Preview.css'
-// import App from '../../App';
+import url from '../url';
 
 const Preview = () => {
   return (
     <div className="preview">
       <h1>Nosov Mikhail</h1>
-      <Link to="/myTodo">To Do List - My first react app</Link> {" "}
+      <Link to={url.TodoApp}>To Do List - My first react app</Link> {" "}
     </div>
   )
 }

@@ -4,7 +4,8 @@ import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
 import WithLoadingComponent from '../Hoc/Hoc';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import url from '../url';
 
 const TodoApp = () => {
   const [theme, setTheme] = useState('light');
@@ -35,7 +36,7 @@ const TodoApp = () => {
   return (
     
     <ThemeContext.Provider value={theme}>
-    <Link className='preview-link' to="/">Home Page</Link>
+    <Link className='preview-link' to={url.Preview}>Home Page</Link>
       <button 
         className={`switch-btn-${theme} switch-btn`}
         onClick={handlerToggleThemeAndDescriptionBtn}>

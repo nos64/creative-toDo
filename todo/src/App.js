@@ -5,7 +5,7 @@ import {
   BrowserRouter,
   Routes,
   Route
-} from "react-router-dom";
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const App = () => {
