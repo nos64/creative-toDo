@@ -1,61 +1,29 @@
-import React, { useState, useEffect} from 'react';
-import './App.css';
-import ToDo from './components/Todo/ToDo';
-import { ThemeContext} from './components/ThemeContext/ThemeContext';
-import WithLoadingComponent from './components/HOC/HOC';
+import Preview from '../src/components/Preview/Preview';
+import TodoApp from './components/TodoApp/TodoApp';
+import NoMatch from './components/NoMatch/NoMatch';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Loader from './components/Loader/Loader';
 
 const App = () => {
-  const [theme, setTheme] = useState('light');
-  const [textBtn, setTextBtn] = useState('Light theme');
-  let [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setIsLoading(isLoading = false), 1000)
-  });
-
-  const handlerToggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
-  const handlerToggleDescriptionBtn = () => {
-    
-    const THEME_MODE = {
-      DARK: 'Dark theme',
-      LIGHT: 'Light theme',
-    };
-
-    setTextBtn(
-      textBtn === THEME_MODE.LIGHT ?
-      THEME_MODE.DARK : 
-      THEME_MODE.LIGHT
-    );
-      
-  }
-
-  const handlerToggleThemeAndDescriptionBtn = () => {
-    handlerToggleTheme();
-    handlerToggleDescriptionBtn();
-  }
-
-  return(
-    isLoading === true ? <Loader/> :
-    <ThemeContext.Provider value={theme}>
-      <button 
-        className={`switch-btn-${theme} switch-btn`}
-        onClick={handlerToggleThemeAndDescriptionBtn}>
-        {textBtn}
-      </button>
-
-      <ToDo/>
-
-    </ThemeContext.Provider>
+  
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Preview/>} />
+        <Route path="myTodo" element={<TodoApp />} />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
+    </BrowserRouter>
   )
 
 }
 
-ThemeContext.Provider.propTypes = {
-  value: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.element),
+BrowserRouter.propTypes = {
+  children: PropTypes.element,
 }
 
-export default WithLoadingComponent(App);
+export default App;
