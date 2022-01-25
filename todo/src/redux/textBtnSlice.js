@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const textBtnSlice = createSlice({
   name: 'textBtn',
   initialState: {
-    theme: 'Light theme'
+    textBtn: 'Dark theme'
   },
   reducers: {
     handlerToggleDescriptionBtn(state, action){
@@ -11,10 +11,11 @@ const textBtnSlice = createSlice({
         DARK: 'Dark theme',
         LIGHT: 'Light theme',
       };
-      state.textBtn(action.preload.textBtn === THEME_MODE.LIGHT ?
-        THEME_MODE.DARK : 
-        THEME_MODE.LIGHT)
-      
+      if (action.payload === THEME_MODE.LIGHT) {
+        state.textBtn = THEME_MODE.DARK;
+      } else {
+        state.textBtn = THEME_MODE.LIGHT;
+      }
     }
   },
 });

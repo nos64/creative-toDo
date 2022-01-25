@@ -1,14 +1,18 @@
 import React from 'react';
 import './TodoItems.css';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
-import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
+import {deleteTaskHandler} from '../../redux/todoSlice';
 
-const TodoItems = ({tasks, deleteTaskHandler}) => {
-  // const onTaskDelete = (key) => key.deleteTaskHandler(key);
+const TodoItems = ({key}) => {
+  
+  const tasks = useSelector(state => state.tasks.tasks);
+  const dispatch = useDispatch();
 
   const createTasks = (task) => {
     return (
-      <ThemeContext.Consumer key={task.key}>
+      <ThemeContext.Consumer key={key} {...task}>
+  
         {context => (
           <li key={task.key} className='todo-item'>
             <label>
@@ -17,7 +21,7 @@ const TodoItems = ({tasks, deleteTaskHandler}) => {
             </label>
   
             <button className={`del-btn-${context} del-btn`}
-            onClick={() => deleteTaskHandler(task.key)}>X</button>
+            onClick={() => dispatch(deleteTaskHandler(task.key))}>X</button>
           </li>
         )}
       </ThemeContext.Consumer>
@@ -30,10 +34,5 @@ const TodoItems = ({tasks, deleteTaskHandler}) => {
     </ul>
   );
 }
-
-// TodoItems.propTypes = {
-//   entries: PropTypes.array.isRequired,
-//   delete: PropTypes.func,
-// }
 
 export default TodoItems;

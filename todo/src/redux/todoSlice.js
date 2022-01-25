@@ -7,17 +7,19 @@ const todoSlice = createSlice({
   },
   reducers: {
     addTaskHandler(state, action) {
-      console.log(state, action)
       state.tasks.push({
-        text: action.preload.inputValue,
+        text: action.payload.inputValue,
         key: Date.now().toString()
       });
     },
-    deleteTaskHandler(state, action) {},
-    findDuplicateTasks(state, action) {},
+    
+    deleteTaskHandler(state, action) {
+      state.tasks = state.tasks.filter(task => task.key !== action.payload)
+    },
+
   },
 });
 
-export const {addTaskHandler, deleteTaskHandler, findDuplicateTasks} = todoSlice.actions;
+export const {addTaskHandler, deleteTaskHandler} = todoSlice.actions;
 
 export default todoSlice.reducer;
