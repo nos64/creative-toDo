@@ -3,9 +3,8 @@ import './TodoItems.css';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
 import PropTypes from 'prop-types';
 
-const TodoItems = (props) => {
-
-  const onTaskDelete = (key) => props.delete(key);
+const TodoItems = ({tasks, deleteTaskHandler}) => {
+  // const onTaskDelete = (key) => key.deleteTaskHandler(key);
 
   const createTasks = (task) => {
     return (
@@ -18,7 +17,7 @@ const TodoItems = (props) => {
             </label>
   
             <button className={`del-btn-${context} del-btn`}
-            onClick={() => onTaskDelete(task.key)}>X</button>
+            onClick={() => deleteTaskHandler(task.key)}>X</button>
           </li>
         )}
       </ThemeContext.Consumer>
@@ -27,14 +26,14 @@ const TodoItems = (props) => {
 
   return(
     <ul className='todo-list'>
-      {props.entries.map(createTasks)}
+      {tasks.map(createTasks)}
     </ul>
   );
 }
 
-TodoItems.propTypes = {
-  entries: PropTypes.array.isRequired,
-  delete: PropTypes.func,
-}
+// TodoItems.propTypes = {
+//   entries: PropTypes.array.isRequired,
+//   delete: PropTypes.func,
+// }
 
 export default TodoItems;

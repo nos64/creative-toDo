@@ -1,5 +1,5 @@
 import './ToDo.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
@@ -30,19 +30,18 @@ const ToDo = () => {
         key: Date.now().toString()
       }
 
-      setTasks (tasks = [...tasks, newTask])
+      setTasks ([...tasks, newTask])
     }
 
-    setInputValue(inputValue = '')
+    setInputValue('')
     
     }
     
   const changeInputHandler = (e) => setInputValue(inputValue = e.target.value);
     
   const deleteTaskHandler = (key) => {
-    const filteredTask = tasks.filter(task => task.key !== key);
+    setTasks(tasks.filter(task => task.key !== key));
 
-    setTasks (tasks = filteredTask)
   }
 
   return (
@@ -61,7 +60,8 @@ const ToDo = () => {
           <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
         </form>
 
-        <TodoItems entries={tasks} delete={deleteTaskHandler}/>
+        <TodoItems tasks={tasks} 
+          deleteTaskHandler={deleteTaskHandler}/>
       </div>
     )}
       </ThemeContext.Consumer>
