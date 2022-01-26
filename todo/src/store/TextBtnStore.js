@@ -8,7 +8,6 @@ class TextBtnStore {
   }
 
   handlerToggleDescriptionBtn() {
-    
     const THEME_MODE = {
       DARK: 'Dark theme',
       LIGHT: 'Light theme',
@@ -18,10 +17,8 @@ class TextBtnStore {
       this.textBtn = THEME_MODE.DARK;
     } else {
       this.textBtn = THEME_MODE.LIGHT;
-    }
-      
+    } 
   }
-
 }
 
 export default new TextBtnStore();

@@ -4,7 +4,7 @@ import {ThemeContext} from '../ThemeContext/ThemeContext';
 import { observer } from "mobx-react-lite"
 import TodoStore from '../../store/TodoStore';
 
-const TodoItems = observer(() => {
+const TodoItems = () => {
 
   const createTasks = (task) => {
     return (
@@ -29,7 +29,7 @@ const TodoItems = observer(() => {
       {TodoStore.tasks.map(createTasks)}
     </ul>
   );
-})
+}
 
 
-export default TodoItems;
+export default observer(TodoItems);

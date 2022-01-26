@@ -13,8 +13,7 @@ class TodoStore {
         text: task,
         key: Date.now().toString()
       }
-      )
-
+    )
   }
 
   deleteTodo(key) {

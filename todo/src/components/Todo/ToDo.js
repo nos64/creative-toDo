@@ -1,15 +1,13 @@
 import './ToDo.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
 import { observer } from "mobx-react-lite"
 import TodoStore from '../../store/TodoStore';
 
-const ToDo = observer(() => {
-
+const ToDo = () => {
     let [inputValue, setInputValue] = useState('');
-   
     const findDuplicateTasks = () => {
       return TodoStore.tasks.filter((task) => {
         if (task.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
@@ -43,12 +41,17 @@ const ToDo = observer(() => {
           <Greeting/>
           
           <form onSubmit={addTaskHandler}>
-            <input className={`add-place-${context} add-place`} onChange={changeInputHandler}
-            value={inputValue}
-            placeholder='Add new task'>
+            <input 
+              className={`add-place-${context} add-place`} 
+              onChange={changeInputHandler}
+              value={inputValue}
+              placeholder='Add new task'>
             </input>
   
-            <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
+            <button 
+              className={`add-btn-${context} add-btn`} 
+              type="submit">ADD NEW TASK
+            </button>
           </form>
   
           <TodoItems tasks={TodoStore.tasks}/>
@@ -56,6 +59,6 @@ const ToDo = observer(() => {
       )}
         </ThemeContext.Consumer>
     );
-  });
+  };
 
-export default ToDo;
+export default observer(ToDo);

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import './TodoApp.css';
 import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
@@ -10,8 +10,7 @@ import { observer } from "mobx-react-lite"
 import ThemeStore from '../../store/ThemeStore';
 import TextBtnStore from '../../store/TextBtnStore';
 
-const TodoApp = observer( () => {
-
+const TodoApp = () => {
   const handlerToggleThemeAndDescriptionBtn = () => {
     ThemeStore.handlerToggleTheme();
     TextBtnStore.handlerToggleDescriptionBtn();
@@ -32,7 +31,7 @@ const TodoApp = observer( () => {
     </ThemeContext.Provider>
   )
 
-})
+}
 
 ThemeContext.Provider.propTypes = {
   value: PropTypes.string,
@@ -43,4 +42,4 @@ Link.propTypes = {
   children: PropTypes.string,
 }
 
-export default WithLoadingComponent(TodoApp);
+export default observer(WithLoadingComponent(TodoApp));
