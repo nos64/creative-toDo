@@ -8,15 +8,15 @@ import TodoStore from '../../store/TodoStore';
 
 const ToDo = observer(() => {
 
-    // let [tasks, setTasks] = useState([]);
     let [inputValue, setInputValue] = useState('');
    
     const findDuplicateTasks = () => {
-      return TodoStore.tasks.filter((item) => {
-        if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
+      return TodoStore.tasks.filter((task) => {
+        if (task.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
           alert('This task already exists')
           setInputValue(inputValue = '')
         }
+        return TodoStore.tasks
       })
     }
       
@@ -24,27 +24,16 @@ const ToDo = observer(() => {
       e.preventDefault();
       
       findDuplicateTasks(TodoStore.tasks, inputValue);
+
       if (inputValue.trim()) {
         TodoStore.addTask(inputValue)
-        // const newTask = {
-        //   text: inputValue,
-        //   key: Date.now().toString()
-        // }
-  
-        // setTasks([...tasks, newTask])
       }
   
       setInputValue('')
       
       }
       
-    const changeInputHandler = (e) => setInputValue(inputValue = e.target.value);
-      
-    // const deleteTaskHandler = (key) => {
-    //   const filteredTask = TodoStore.tasks.filter(task => task.key !== key);
-  
-    //   setTasks (tasks = filteredTask)
-    // }
+    const changeInputHandler = (e) => setInputValue(inputValue = e.target.value); 
   
     return (
       <ThemeContext.Consumer>
