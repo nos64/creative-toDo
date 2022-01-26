@@ -7,22 +7,17 @@ import { observer } from "mobx-react-lite"
 import TodoStore from '../../store/TodoStore';
 
 const ToDo = () => {
-    let [inputValue, setInputValue] = useState('');
-    const findDuplicateTasks = () => {
-      return TodoStore.tasks.filter((task) => {
-        if (task.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
-          alert('This task already exists')
-          setInputValue(inputValue = '')
-        }
-        return TodoStore.tasks
-      })
-    }
-      
+    const [inputValue, setInputValue] = useState('');
+ 
     const addTaskHandler = (e) => {
       e.preventDefault();
+    
+      if (TodoStore.tasks.some(task => task.text === inputValue)) {
+        alert('This task already exists')
+        setInputValue('')
+        return
+      }
       
-      findDuplicateTasks(TodoStore.tasks, inputValue);
-
       if (inputValue.trim()) {
         TodoStore.addTask(inputValue)
       }
@@ -31,7 +26,7 @@ const ToDo = () => {
       
       }
       
-    const changeInputHandler = (e) => setInputValue(inputValue = e.target.value); 
+    const changeInputHandler = (e) => setInputValue(e.target.value); 
   
     return (
       <ThemeContext.Consumer>
