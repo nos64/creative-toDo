@@ -19,8 +19,8 @@ const ToDo = () => {
 
     if (tasks.some(task => task.text === inputValue)) {
       alert('This task already exists')
-        setInputValue('')
-        return
+      setInputValue('')
+      return
     }
 
     if (inputValue.trim()) {
