@@ -1,11 +1,10 @@
 import React from 'react';
 import './TodoItems.css';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
-import PropTypes from 'prop-types';
+import { observer } from "mobx-react-lite"
+import TodoStore from '../../store/TodoStore';
 
-const TodoItems = (props) => {
-
-  const onTaskDelete = (key) => props.delete(key);
+const TodoItems = observer(() => {
 
   const createTasks = (task) => {
     return (
@@ -18,7 +17,7 @@ const TodoItems = (props) => {
             </label>
   
             <button className={`del-btn-${context} del-btn`}
-            onClick={() => onTaskDelete(task.key)}>X</button>
+            onClick={() => TodoStore.deleteTodo(task.key)}>X</button>
           </li>
         )}
       </ThemeContext.Consumer>
@@ -27,14 +26,10 @@ const TodoItems = (props) => {
 
   return(
     <ul className='todo-list'>
-      {props.entries.map(createTasks)}
+      {TodoStore.tasks.map(createTasks)}
     </ul>
   );
-}
+})
 
-TodoItems.propTypes = {
-  entries: PropTypes.array.isRequired,
-  delete: PropTypes.func,
-}
 
 export default TodoItems;
