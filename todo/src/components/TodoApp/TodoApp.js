@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import './TodoApp.css';
 import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
@@ -11,6 +11,7 @@ import ThemeStore from '../../store/ThemeStore';
 import TextBtnStore from '../../store/TextBtnStore';
 
 const TodoApp = () => {
+
   const handlerToggleThemeAndDescriptionBtn = () => {
     ThemeStore.handlerToggleTheme();
     TextBtnStore.handlerToggleDescriptionBtn();
@@ -42,4 +43,4 @@ Link.propTypes = {
   children: PropTypes.string,
 }
 
-export default observer(WithLoadingComponent(TodoApp));
+export default WithLoadingComponent(observer(TodoApp));
