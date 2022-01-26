@@ -9,7 +9,7 @@ import {addTaskHandler} from '../../redux/todoSlice';
 
 const ToDo = () => {
 
-  let [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks.tasks);
@@ -17,7 +17,11 @@ const ToDo = () => {
   const addTask = (e) => {
     e.preventDefault();
 
-    findDuplicateTasks(tasks, {inputValue});
+    if (tasks.some(task => task.text === inputValue)) {
+      alert('This task already exists')
+        setInputValue('')
+        return
+    }
 
     if (inputValue.trim()) {
       dispatch(addTaskHandler({inputValue}))
@@ -25,19 +29,7 @@ const ToDo = () => {
 
     setInputValue('');
   }
-
-  const findDuplicateTasks = () => {
-    return tasks.filter((task) => {
-      if (task.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
-        alert('This task already exists');
-        // setInputValue('');
-        setInputValue(inputValue = '');
-      }
-      return tasks
-    })
-    
-  }
-    
+ 
   const changeInputHandler = (e) => setInputValue(e.target.value);
 
   return (
@@ -48,12 +40,17 @@ const ToDo = () => {
         <Greeting/>
         
         <form onSubmit={addTask}>
-          <input className={`add-place-${context} add-place`} onChange={changeInputHandler}
-          value={inputValue}
-          placeholder='Add new task'>
+          <input 
+            className={`add-place-${context} add-place`} 
+            onChange={changeInputHandler}
+            value={inputValue}
+            placeholder='Add new task'>
           </input>
 
-          <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
+          <button 
+            className={`add-btn-${context} add-btn`} 
+            type="submit">ADD NEW TASK
+          </button>
         </form>
 
         <TodoItems/>
