@@ -1,49 +1,36 @@
 import './ToDo.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
+import {useDispatch, useSelector} from 'react-redux';
+import {addTaskHandler} from '../../redux/todoSlice';
 
 
 const ToDo = () => {
 
-  let [tasks, setTasks] = useState([]);
-  let [inputValue, setInputValue] = useState('');
- 
-  const findDuplicateTasks = () => {
-    return tasks.filter((item) => {
-      if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
-        alert('This task already exists')
-        setInputValue(inputValue = '')
-      }
-    })
-  }
-    
-  const addTaskHandler = (e) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks.tasks);
+
+  const addTask = (e) => {
     e.preventDefault();
 
-    findDuplicateTasks(tasks, inputValue);
+    if (tasks.some(task => task.text === inputValue)) {
+      alert('This task already exists')
+      setInputValue('')
+      return
+    }
+
     if (inputValue.trim()) {
-      
-      const newTask = {
-        text: inputValue,
-        key: Date.now().toString()
-      }
-
-      setTasks (tasks = [...tasks, newTask])
+      dispatch(addTaskHandler({inputValue}))
     }
 
-    setInputValue(inputValue = '')
-    
-    }
-    
-  const changeInputHandler = (e) => setInputValue(inputValue = e.target.value);
-    
-  const deleteTaskHandler = (key) => {
-    const filteredTask = tasks.filter(task => task.key !== key);
-
-    setTasks (tasks = filteredTask)
+    setInputValue('');
   }
+ 
+  const changeInputHandler = (e) => setInputValue(e.target.value);
 
   return (
     <ThemeContext.Consumer>
@@ -52,16 +39,21 @@ const ToDo = () => {
     
         <Greeting/>
         
-        <form onSubmit={addTaskHandler}>
-          <input className={`add-place-${context} add-place`} onChange={changeInputHandler}
-          value={inputValue}
-          placeholder='Add new task'>
+        <form onSubmit={addTask}>
+          <input 
+            className={`add-place-${context} add-place`} 
+            onChange={changeInputHandler}
+            value={inputValue}
+            placeholder='Add new task'>
           </input>
 
-          <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
+          <button 
+            className={`add-btn-${context} add-btn`} 
+            type="submit">ADD NEW TASK
+          </button>
         </form>
 
-        <TodoItems entries={tasks} delete={deleteTaskHandler}/>
+        <TodoItems/>
       </div>
     )}
       </ThemeContext.Consumer>

@@ -7,17 +7,22 @@ import {
   Route
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const App = () => {
   
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Preview/>} />
-        <Route path="myTodo" element={<TodoApp />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Preview/>} />
+          <Route path="myTodo" element={<TodoApp />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+    
   )
 
 }

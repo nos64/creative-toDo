@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React from 'react';
 import './TodoApp.css';
 import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
@@ -6,31 +6,19 @@ import WithLoadingComponent from '../Hoc/Hoc';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import url from '../url';
+import {useDispatch, useSelector} from 'react-redux';
+import {handlerToggleTheme} from '../../redux/themeSlice';
+import {handlerToggleDescriptionBtn} from '../../redux/textBtnSlice';
 
 const TodoApp = () => {
-  const [theme, setTheme] = useState('light');
-  const [textBtn, setTextBtn] = useState('Light theme');
 
-  const handlerToggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
-  const handlerToggleDescriptionBtn = () => {
-    
-    const THEME_MODE = {
-      DARK: 'Dark theme',
-      LIGHT: 'Light theme',
-    };
-
-    setTextBtn(
-      textBtn === THEME_MODE.LIGHT ?
-      THEME_MODE.DARK : 
-      THEME_MODE.LIGHT
-    );
-      
-  }
+  const dispatch = useDispatch();
+  const theme = useSelector(state => state.theme.theme);
+  const textBtn = useSelector(state => state.textBtn.textBtn);
 
   const handlerToggleThemeAndDescriptionBtn = () => {
-    handlerToggleTheme();
-    handlerToggleDescriptionBtn();
+    dispatch(handlerToggleTheme(theme));
+    dispatch(handlerToggleDescriptionBtn(textBtn));
   }
 
   return (
