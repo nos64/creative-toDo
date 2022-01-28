@@ -1,4 +1,5 @@
-import Preview from '../src/components/Preview/Preview';
+import React from "react";
+import Preview from './components/Preview/Preview.jsx';
 import TodoApp from './components/TodoApp/TodoApp';
 import NoMatch from './components/NoMatch/NoMatch';
 import {
@@ -6,11 +7,10 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-const App = () => {
+const App: React.FC = () => {
   
   return (
     <Provider store={store}>
@@ -27,8 +27,5 @@ const App = () => {
 
 }
 
-BrowserRouter.propTypes = {
-  children: PropTypes.element,
-}
 
 export default App;

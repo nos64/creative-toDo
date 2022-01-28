@@ -5,16 +5,16 @@ import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTaskHandler} from '../../redux/todoSlice';
+import {RootState} from '../../redux/store';
 
+const ToDo: React.FC = () => {
 
-const ToDo = () => {
-
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
 
   const dispatch = useDispatch();
-  const tasks = useSelector(state => state.tasks.tasks);
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
-  const addTask = (e) => {
+  const addTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (tasks.some(task => task.text === inputValue)) {
@@ -30,7 +30,7 @@ const ToDo = () => {
     setInputValue('');
   }
  
-  const changeInputHandler = (e) => setInputValue(e.target.value);
+  const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value);
 
   return (
     <ThemeContext.Consumer>

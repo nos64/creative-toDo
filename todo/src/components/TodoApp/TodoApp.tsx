@@ -3,18 +3,18 @@ import './TodoApp.css';
 import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
 import WithLoadingComponent from '../Hoc/Hoc';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import url from '../url';
 import {useDispatch, useSelector} from 'react-redux';
 import {handlerToggleTheme} from '../../redux/themeSlice';
 import {handlerToggleDescriptionBtn} from '../../redux/textBtnSlice';
+import {RootState} from '../../redux/store';
 
-const TodoApp = () => {
+const TodoApp: React.FC = () => {
 
   const dispatch = useDispatch();
-  const theme = useSelector(state => state.theme.theme);
-  const textBtn = useSelector(state => state.textBtn.textBtn);
+  const theme = useSelector((state: RootState) => state.theme.theme);
+  const textBtn = useSelector((state: RootState) => state.textBtn.textBtn);
 
   const handlerToggleThemeAndDescriptionBtn = () => {
     dispatch(handlerToggleTheme(theme));
@@ -36,15 +36,6 @@ const TodoApp = () => {
     </ThemeContext.Provider>
   )
 
-}
-
-ThemeContext.Provider.propTypes = {
-  value: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.element),
-}
-
-Link.propTypes = {
-  children: PropTypes.string,
 }
 
 export default WithLoadingComponent(TodoApp);
