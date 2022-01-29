@@ -1,4 +1,4 @@
-import { createSlice, PayloadActionCreator } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
   name: 'tasks',
