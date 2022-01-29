@@ -1,5 +1,5 @@
 import React from "react";
-import Preview from './components/Preview/Preview.jsx';
+import Preview from './components/Preview/Preview';
 import TodoApp from './components/TodoApp/TodoApp';
 import NoMatch from './components/NoMatch/NoMatch';
 import {

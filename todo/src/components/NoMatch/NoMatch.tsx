@@ -1,7 +1,8 @@
+import React from 'react';
 import './NoMatch.css';
-
 import { Link } from 'react-router-dom';
 import url from '../url';
+
 
 const NoMatch: React.FC = () => {
   return  (

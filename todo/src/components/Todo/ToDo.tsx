@@ -6,7 +6,7 @@ import {ThemeContext} from '../ThemeContext/ThemeContext';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTaskHandler} from '../../redux/todoSlice';
 import {RootState} from '../../redux/store';
-
+ 
 const ToDo: React.FC = () => {
 
   const [inputValue, setInputValue] = useState<string>('');

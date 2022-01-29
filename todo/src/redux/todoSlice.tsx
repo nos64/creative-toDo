@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadActionCreator } from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
   name: 'tasks',
   initialState: {
-    tasks: []
+    tasks: [] as any[]
   },
   reducers: {
     addTaskHandler(state, action) {
