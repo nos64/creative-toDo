@@ -22,10 +22,7 @@ const App: React.FC = () => {
         </Routes>
       </BrowserRouter>
     </Provider>
-    
   )
-
 }
-
 
 export default App;
