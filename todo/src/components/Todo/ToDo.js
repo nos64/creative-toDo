@@ -1,71 +1,59 @@
 import './ToDo.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Greeting  from '../Greeting/Greeting';
 import TodoItems from '../TodoItems/TodoItems';
 import {ThemeContext} from '../ThemeContext/ThemeContext';
-
+import { observer } from "mobx-react-lite"
+import TodoStore from '../../store/TodoStore';
 
 const ToDo = () => {
-
-  let [tasks, setTasks] = useState([]);
-  let [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState('');
  
-  const findDuplicateTasks = () => {
-    return tasks.filter((item) => {
-      if (item.text.trim().toLowerCase() === inputValue.trim().toLowerCase()) {
+    const addTaskHandler = (e) => {
+      e.preventDefault();
+    
+      if (TodoStore.tasks.some(task => task.text === inputValue)) {
         alert('This task already exists')
-        setInputValue(inputValue = '')
+        setInputValue('')
+        return
       }
-    })
-  }
-    
-  const addTaskHandler = (e) => {
-    e.preventDefault();
-
-    findDuplicateTasks(tasks, inputValue);
-    if (inputValue.trim()) {
       
-      const newTask = {
-        text: inputValue,
-        key: Date.now().toString()
+      if (inputValue.trim()) {
+        TodoStore.addTask(inputValue)
       }
+  
+      setInputValue('')
+      
+      }
+      
+    const changeInputHandler = (e) => setInputValue(e.target.value); 
+  
+    return (
+      <ThemeContext.Consumer>
+      {context => (
+        <div className={`todo-wrapper-${context} todo-wrapper`}>
+      
+          <Greeting/>
+          
+          <form onSubmit={addTaskHandler}>
+            <input 
+              className={`add-place-${context} add-place`} 
+              onChange={changeInputHandler}
+              value={inputValue}
+              placeholder='Add new task'>
+            </input>
+  
+            <button 
+              className={`add-btn-${context} add-btn`} 
+              type="submit">ADD NEW TASK
+            </button>
+          </form>
+  
+          <TodoItems tasks={TodoStore.tasks}/>
+        </div>
+      )}
+        </ThemeContext.Consumer>
+    );
+  };
 
-      setTasks (tasks = [...tasks, newTask])
-    }
-
-    setInputValue(inputValue = '')
-    
-    }
-    
-  const changeInputHandler = (e) => setInputValue(inputValue = e.target.value);
-    
-  const deleteTaskHandler = (key) => {
-    const filteredTask = tasks.filter(task => task.key !== key);
-
-    setTasks (tasks = filteredTask)
-  }
-
-  return (
-    <ThemeContext.Consumer>
-    {context => (
-      <div className={`todo-wrapper-${context} todo-wrapper`}>
-    
-        <Greeting/>
-        
-        <form onSubmit={addTaskHandler}>
-          <input className={`add-place-${context} add-place`} onChange={changeInputHandler}
-          value={inputValue}
-          placeholder='Add new task'>
-          </input>
-
-          <button className={`add-btn-${context} add-btn`} type="submit">ADD NEW TASK</button>
-        </form>
-
-        <TodoItems entries={tasks} delete={deleteTaskHandler}/>
-      </div>
-    )}
-      </ThemeContext.Consumer>
-  );
-}
-
-export default ToDo;
+export default observer(ToDo);

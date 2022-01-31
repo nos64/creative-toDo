@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React  from 'react';
 import './TodoApp.css';
 import ToDo from '../Todo/ToDo';
 import { ThemeContext} from '../ThemeContext/ThemeContext';
@@ -6,41 +6,25 @@ import WithLoadingComponent from '../Hoc/Hoc';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import url from '../url';
+import { observer } from "mobx-react-lite"
+import ThemeStore from '../../store/ThemeStore';
+import TextBtnStore from '../../store/TextBtnStore';
 
 const TodoApp = () => {
-  const [theme, setTheme] = useState('light');
-  const [textBtn, setTextBtn] = useState('Light theme');
-
-  const handlerToggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
-  const handlerToggleDescriptionBtn = () => {
-    
-    const THEME_MODE = {
-      DARK: 'Dark theme',
-      LIGHT: 'Light theme',
-    };
-
-    setTextBtn(
-      textBtn === THEME_MODE.LIGHT ?
-      THEME_MODE.DARK : 
-      THEME_MODE.LIGHT
-    );
-      
-  }
 
   const handlerToggleThemeAndDescriptionBtn = () => {
-    handlerToggleTheme();
-    handlerToggleDescriptionBtn();
+    ThemeStore.handlerToggleTheme();
+    TextBtnStore.handlerToggleDescriptionBtn();
   }
 
   return (
     
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={ThemeStore.theme}>
     <Link className='preview-link' to={url.Preview}>Home Page</Link>
       <button 
-        className={`switch-btn-${theme} switch-btn`}
+        className={`switch-btn-${ThemeStore.theme} switch-btn`}
         onClick={handlerToggleThemeAndDescriptionBtn}>
-        {textBtn}
+        {TextBtnStore.textBtn}
       </button>
 
       <ToDo/>
@@ -59,4 +43,4 @@ Link.propTypes = {
   children: PropTypes.string,
 }
 
-export default WithLoadingComponent(TodoApp);
+export default WithLoadingComponent(observer(TodoApp));
